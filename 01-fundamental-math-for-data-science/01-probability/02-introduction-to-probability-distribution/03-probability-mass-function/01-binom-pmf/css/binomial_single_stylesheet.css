@@ -1,0 +1,44 @@
+.svg-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/* Bars */
+rect {
+    stroke: black;
+    stroke-width: 2;
+}
+
+#d3-binomPlot-slider, #d3-binomPlot {
+    margin: auto;    
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    padding: 1px;				
+    font: 18px sans-serif;
+    border-radius: 8px;
+    background: #FFFAE5;
+    border-color: black;
+    border: solid;
+}
+
+/* Overriding D3 SVG Defaults */
+h1, h2, .tick, .axis text, .slider text, text{
+    font: 24px sans-serif;
+    fill: black;
+}
+
+.grid line {
+    stroke: black;
+    stroke-opacity: 0.7;
+}

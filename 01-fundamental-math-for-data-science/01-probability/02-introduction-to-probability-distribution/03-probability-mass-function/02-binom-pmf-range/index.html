@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <title>Binomial Distribution: Calculating Probability of a Range</title>
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider@1.10.4"></script>
+    <script src="./js/binomial_double.js"></script>
+    <script src="https://unpkg.com/d3fc"></script>
+    <link rel=stylesheet  href="./css/binomial_double.css">
+</head>
+
+<body>
+    <div class=tooltip style="opacity: 0;"> Hello </div>
+    <div class="svg-container" alt="binomial widget">
+    <div class=svg-content>
+            <h1>Binomial Distribution: Calculating Probability of a Range</h1> 
+    </div>
+    
+    <div class=svg-content>
+        <svg height=600 id="d3-binomPlot" aria-label="binomial widget"></svg>
+    </div>
+
+
+    <div class=svg-content>
+        <svg height=80 id="d3-binomPlot-slider" aria-label="binomial slider"></svg>
+    </div>
+
+    <div class=svg-content>
+        <span>  
+            <h2>
+                <text id="d3-binomPlot-stg"></text>
+                <text id="d3-binomPlot-result"></text>
+            </h2>
+        </span>
+    </div>  
+
+
+</div>
+        
+<script>
+    appletInit()
+</script>
+
+    
+</body>
+</html>

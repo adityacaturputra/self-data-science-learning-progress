@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<head>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src="https://unpkg.com/d3fc"></script>
+    <script src="./js/binomial_single_utils.js"></script>
+    <link rel=stylesheet  href="./css/binomial_single_stylesheet.css">
+
+</head>
+
+<body>
+    <div class=tooltip style="opacity: 0;"> Hello </div>
+    <div class="svg-container">
+        <div class=svg-content>
+            <h1>Binomial Distribution: Calculating Probability of a Given Number of Heads</h1> 
+        </div>
+
+        <div class=svg-content>
+            <svg height=600 id="d3-binomPlot" aria-label="binomial widget"></svg>
+        </div>
+
+        <div class=svg-content>
+            <span class=svg-content><h2>Number of Heads</h2></span>
+        </div>  
+        
+        <div class=svg-content>
+            <svg height=80 id="d3-binomPlot-slider" aria-label="binomial slider"></svg>
+        </div>
+        <span class=svg-content><h2>Number of Trials</h2></span>
+    </div>
+
+<script>
+    // Set Margin to Top and Bottom of Pag
+    appletInit()
+</script>
+</body>
+</html>
