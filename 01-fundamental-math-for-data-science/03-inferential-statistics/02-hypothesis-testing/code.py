@@ -1,64 +1,47 @@
-# here are some of the things i’ve learned about hypothesis tests in general:
-
-# All hypothesis tests start with a null and alternative hypothesis
-
-# Outcomes of a hypothesis test that might be reported include:
-
-# confidence intervals
-# p-values
-# A hypothesis test can be simulated by:
-
-# taking repeated random samples where the null hypothesis is assumed to be true
-# using those simulated samples to generate a null distribution
-# comparing an observed sample statistic to that null distribution
-
-import numpy as np
+# import libraries
+import codecademylib3
 import pandas as pd
+import numpy as np
+
+# load data
+heart = pd.read_csv('heart_disease.csv')
+yes_hd = heart[heart.heart_disease == 'presence']
+no_hd = heart[heart.heart_disease == 'absence']
+
+# get cholesterol levels for patients with heart disease
+chol_hd = yes_hd.chol
+
+# calculate mean cholesterol level for patients with hd
+print(np.mean(chol_hd))
+
+# compare to cut-off for high cholesterol
+from scipy.stats import ttest_1samp
+tstat, pval = ttest_1samp(chol_hd, 240)
+print(pval/2)
+
+# get cholesterol levels for patients without heart disease
+chol_no_hd = no_hd.chol
+
+# calculate mean cholesterol level for patients w/o hd
+print(np.mean(chol_no_hd))
+
+# compare to cut-off for high cholesterol
+from scipy.stats import ttest_1samp
+tstat, pval = ttest_1samp(chol_no_hd, 240)
+print(pval/2)
+
+# calculate number of patients total
+num_patients = len(heart)
+print(num_patients)
+
+# calculate number of patients with fbs>120
+num_highfbs_patients = np.sum(heart.fbs)
+print(num_highfbs_patients)
+
+# calculate 8% of sample size
+print(0.08*num_patients)
+
+# run binomial test
 from scipy.stats import binom_test
-
-def simulation_binomial_test(observed_successes, n, p, alternative_hypothesis):
-  #initialize null_outcomes
-  null_outcomes = []
-  
-  #generate the simulated null distribution
-  for i in range(10000):
-    simulated_monthly_visitors = np.random.choice(['y', 'n'], size=n, p=[p, 1-p])
-    num_purchased = np.sum(simulated_monthly_visitors == 'y')
-    null_outcomes.append(num_purchased)
-
-  null_outcomes = np.array(null_outcomes)
-
-  if alternative_hypothesis == 'less':
-    p_value = np.sum(null_outcomes <= observed_successes)/len(null_outcomes) 
-  elif alternative_hypothesis == 'greater':
-    p_value = np.sum(null_outcomes >= observed_successes)/len(null_outcomes)
-  else:
-    difference = np.abs(p*n - observed_successes)
-    upper = p*n + difference
-    lower = p*n - difference
-    p_value = np.sum((null_outcomes >= upper) | (null_outcomes <= lower))/len(null_outcomes)
-  
-  #return the p-value
-  return p_value
-
-#Test your function:
-print('lower tail one-sided test:')
-p_value1 = simulation_binomial_test(45, 500, .1, alternative_hypothesis = 'less')
-print("simulation p-value: ", p_value1)
-
-p_value2 = binom_test(45, 500, .1, alternative = 'less')
-print("binom_test p-value: ", p_value2)
-
-print('upper tail one-sided test:')
-p_value1 = simulation_binomial_test(53, 500, .1, alternative_hypothesis = 'greater')
-print("simulation p-value: ", p_value1)
-
-p_value2 = binom_test(53, 500, .1, alternative = 'greater')
-print("binom_test p-value: ", p_value2)
-
-print('two-sided test:')
-p_value1 = simulation_binomial_test(42, 500, .1, alternative_hypothesis = 'not_equal')
-print("simulation p-value: ", p_value1)
-
-p_value2 = binom_test(42, 500, .1)
-print("binom_test p-value: ", p_value2)
+pval = binom_test(num_highfbs_patients, num_patients, .08, alternative='greater')
+print(pval)
